@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Item</title>
+</head>
+<body>
+    <h1>Add a Todo Item:</h1>
+    <form method="POST" action="add">
+        {% csrf_token %}
+        {{ form.as_p }}
+     
+        <div>
+            <p>
+                <button type="submit">Add Item</button>
+            </p>
+        </div>
+    </form>
+    
+</body>
+</html>
+
+<!-- 
+Next we need a view to display this template so let's go up to views.py
+
+To add an item from this template, we create a form element. This form is going to be the 
+mechanism by which a user can enter the name for a todo item and whether or not it's done.
+And to do that we're just going to need two inputs and a submit button.
+
+The form has a method of POST and an action of add, which is our add URL that we're going to submit the form to.
+POST requests send or post information to the server. GET requests get information from the server. 
+
+# Cross-Site Request Forgery token: {% csrf_token %} 
+As a security measure, we must add a special template tag to the form inside the opening form tag whenever 
+we're posting information in Django. So, the CSRF or Cross-Site Request Forgery token is a randomly 
+generated unique value which will be added to the form as a hidden input field when the form's submitted, 
+and works to guarantee that the data we're posting is actually coming from our todo list app and not from 
+another website. If we were to skip adding this token, Django would throw an error when we submitted the form 
+because it wouldn't be able to guarantee that the post data wasn't coming from another site.
+
+# "{{ form.as_p }}" 
+Django forms have a number of built-in methods we can use in the template such as .as_p which will 
+render the fields as paragraphs. And .as_t, which will render them as a table.
+Here, we render the form template variable: "{{form}}", just like we would any other template variable, and 
+".as_p" adjusts to vertical layout. Without .as_p, the "name" field and "done" field will be placed horizontally 
+
+the name attribute of this input is the name we'll use to access the input's value in our view function.
+the ID attribute is the way that we can identify it on the page to apply its label CSS and so on.
+
+create the button a type of submit. So that the button has the same margins around it as the inputs, we wrap a paragraph element around the button
+
+the final piece of the puzzle here is how to handle what happens when the user clicks submit on the form.
+WE will set this in our views.py. 
+
+Go to settings.py, under the INSTALLED_APPS, add our "todo" app to the list of installed apps. 
+And this is going to allow Django to look inside of that app folder for a templates directory.
+-->

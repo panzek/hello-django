@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Item</title>
+</head>
+<body>
+    <h1>Edit a Todo Item:</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+     
+        <div>
+            <p>
+                <button type="submit">Update Item</button>
+            </p>
+        </div>
+    </form>
+    
+</body>
+</html>
+
+<!-- 
+Next we need a view to display this template so let's go up to views.py
+
+To add an item from this template, we create a form element. This form is going to be the 
+mechanism by which a user can enter the name for a todo item and whether or not it's done.
+And to do that we're just going to need two inputs and a submit button.
+
+The form has a method of POST but no action of add, as we have in add_item.html. 
+This will cause the POST requests to post to the same URL we're currently on.
+
+create the button a type of submit. So that the button has the same margins around it as the inputs, 
+we wrap a paragraph element around the button
+
+the final piece of the puzzle here is how to handle what happens when the user clicks submit on the form.
+WE will set this in our views.py and urls.py 
+
+Go to settings.py, under the INSTALLED_APPS, add our "todo" app to the list of installed apps. 
+And this is going to allow Django to look inside of that app folder for a templates directory.
+-->
